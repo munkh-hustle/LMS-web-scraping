@@ -4,8 +4,8 @@ import csv
 
 login_url = "https://lms.must.edu.mn/"
 check = "2"
-login = "B221880037" 
-password = "M592627"
+login = "" 
+password = ""
 
 with requests.session() as s: 
 	req = s.get(login_url).text 
