@@ -199,7 +199,7 @@ lesson_4 = "https://lms.must.edu.mn/Student/Lesson?lcode=S.CD101&tcode=F.PH75&ty
 lesson_5 = "https://lms.must.edu.mn/Student/Lesson?lcode=F.CN112&tcode=J.TC14&type=students&ltp=c"
 lesson_6 = "https://lms.must.edu.mn/Student/Lesson?lcode=S.PT101&tcode=K.PT20&type=students&ltp=c"
 
-# almost_main(lesson_link=lesson_1,write_name="22_s2_english.csv")
+# almost_main(lesson_link=lesson_1,write_name="22_s2_les1.csv")
 # almost_main(lesson_link=lesson_2,write_name="22_s2_les2.csv")
 # almost_main(lesson_link=lesson_3,write_name="22_s2_les3.csv")
 # almost_main(lesson_link=lesson_4,write_name="22_s2_les4.csv")
