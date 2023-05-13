@@ -4,7 +4,8 @@ import numpy as np
 # to do:
 # horizontal values to vertical ?
 
-file_name_no_csv = "test_file"
+# file_name_no_csv = "test_file"
+file_name_no_csv = "22_s1_les"
 
 def get_np_id_from_file(file_name):
     id_list = []
@@ -93,6 +94,25 @@ def convert_np_all_array_to_list(file_name):
     
     return new_list
 
-all_data = convert_np_all_array_to_list(file_name_no_csv)
+def reshaping_3d_to_2d_array(file_name):
+    
+    all_data = convert_np_all_array_to_list(file_name)
 
-print(all_data.size)
+    data_shape = all_data.shape
+
+    sum_shape = sum(data_shape)
+    # print(sum_shape)
+
+    row_data = (sum_shape - 6)
+    # print(row_data)
+
+    column_data = (sum_shape - row_data - 1)
+    # print(column_data)
+
+    reshaped_data = np.reshape(all_data,(row_data,column_data))
+
+    return reshaped_data
+    # print(reshaped_data.shape)
+
+reshaping_3d_to_2d_array(file_name_no_csv)
+
