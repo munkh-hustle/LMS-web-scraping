@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import pandas as pd
 
 # to do:
 # horizontal values to vertical ?
@@ -136,4 +137,25 @@ def making_new_csv(file_name_old, file_name_new):
 
 # to do:
 # combine all new files
+new_csv_names_list = [
+    "22_s1_les_new.csv",
+    "22_s2_les1_new.csv",
+    "22_s2_les2_new.csv",
+    "22_s2_les3_new.csv",
+    "22_s2_les4_new.csv",
+    "22_s2_les5_new.csv",
+    "22_s2_les6_new.csv"
+]
+
+# method 1
+# df_csv_append = pd.DataFrame() 
+# append the CSV files
+# for file in new_csv_names_list:
+#     df = pd.read_csv(file)
+#     df_csv_append = df_csv_append.append(df, ignore_index=True)
+#  
+# print(np.array(df_csv_append).shape)
+
+# method 2
+
 # remove duplicates in file
