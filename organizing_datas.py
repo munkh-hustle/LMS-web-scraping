@@ -165,7 +165,6 @@ df4 = pd.read_csv("22_s2_les4_new.csv")
 df5 = pd.read_csv("22_s2_les5_new.csv")
 df6 = pd.read_csv("22_s2_les6_new.csv")
 
-df_merged = df1.merge(df2, how='outer')
-print(df_merged)
+
 
 # remove duplicates in file
