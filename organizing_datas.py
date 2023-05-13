@@ -5,7 +5,8 @@ import numpy as np
 # horizontal values to vertical ?
 
 # file_name_no_csv = "test_file"
-file_name_no_csv = "22_s1_les"
+file_name_no_csv = "test_file"
+new_file_name_yes_csv = "test_file_new.csv"
 
 def get_np_id_from_file(file_name):
     id_list = []
@@ -114,5 +115,9 @@ def reshaping_3d_to_2d_array(file_name):
     return reshaped_data
     # print(reshaped_data.shape)
 
-reshaping_3d_to_2d_array(file_name_no_csv)
-
+data_to_write = reshaping_3d_to_2d_array(file_name_no_csv)
+ 
+with open(str(new_file_name_yes_csv), 'w',encoding="utf-8", newline='') as file:
+    writer = csv.writer(file)
+    
+    writer.writerow(data_to_write)
