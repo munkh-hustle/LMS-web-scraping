@@ -131,5 +131,9 @@ def making_new_csv(file_name_old, file_name_new):
 #     
 #     making_new_csv(
 #         file_name_old=file_name_no_csv,
-#         file_name_new=new_file_name_yes_csv)
+#         file_name_new=new_file_name_yes_csv
+#     )
 
+# to do:
+# combine all new files
+# remove duplicates in file
