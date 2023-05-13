@@ -124,10 +124,12 @@ def making_new_csv(file_name_old, file_name_new):
 
     print("done writing")
 
-for i in range(1,7):
-    file_name_no_csv = "22_s2_les" + str(i)
-    new_file_name_yes_csv = str(file_name_no_csv + "_new.csv")
-    
-    making_new_csv(
-        file_name_old=file_name_no_csv,
-        file_name_new=new_file_name_yes_csv)
+# making new file to all files
+# for i in range(1,7):
+#     file_name_no_csv = "22_s2_les" + str(i)
+#     new_file_name_yes_csv = str(file_name_no_csv + "_new.csv")
+#     
+#     making_new_csv(
+#         file_name_old=file_name_no_csv,
+#         file_name_new=new_file_name_yes_csv)
+
