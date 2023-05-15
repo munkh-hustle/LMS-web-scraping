@@ -1,9 +1,7 @@
 import csv
 import numpy as np
 import pandas as pd
-
-# to do:
-# horizontal values to vertical ?
+import requests 
 
 file_name_no_csv = "22_s1_les"
 new_file_name_yes_csv = str(file_name_no_csv + "_new.csv")
@@ -22,7 +20,6 @@ def get_np_id_from_file(file_name):
     return np_id
 
 def get_np_name_from_file(file_name):
-
     name_list = []
 
     with open(str(file_name)+'.csv',encoding="utf8") as csv_file: 
@@ -36,7 +33,6 @@ def get_np_name_from_file(file_name):
     return np_name
 
 def get_np_gmail_from_file(file_name):
-
     gmail_list = []
 
     with open(str(file_name)+'.csv',encoding="utf8") as csv_file: 
@@ -50,7 +46,6 @@ def get_np_gmail_from_file(file_name):
     return np_gmail
 
 def get_np_number1_from_file(file_name):
-
     number1_list = []
 
     with open(str(file_name)+'.csv',encoding="utf8") as csv_file: 
@@ -64,7 +59,6 @@ def get_np_number1_from_file(file_name):
     return np_number1
 
 def get_np_number2_from_file(file_name):
-    
     number2_list = []
 
     with open(str(file_name)+'.csv',encoding="utf8") as csv_file: 
@@ -125,46 +119,59 @@ def making_new_csv(file_name_old, file_name_new):
 
     print("done writing")
 
-# making new file to all files
-# for i in range(1,7):
-#     file_name_no_csv = "22_s2_les" + str(i)
-#     new_file_name_yes_csv = str(file_name_no_csv + "_new.csv")
-#     
-#     making_new_csv(
-#         file_name_old=file_name_no_csv,
-#         file_name_new=new_file_name_yes_csv
-#     )
+"""# making new file to all files
+for i in range(1,7):
+    file_name_no_csv = "22_s2_les" + str(i)
+    new_file_name_yes_csv = str(file_name_no_csv + "_new.csv")
+    
+    making_new_csv(
+        file_name_old=file_name_no_csv,
+        file_name_new=new_file_name_yes_csv
+    )
+"""
 
 # to do:
 # combine all new files
-new_csv_names_list = [
-    "22_s1_les_new.csv",
-    "22_s2_les1_new.csv",
-    "22_s2_les2_new.csv",
-    "22_s2_les3_new.csv",
-    "22_s2_les4_new.csv",
-    "22_s2_les5_new.csv",
-    "22_s2_les6_new.csv",
+files_list = [
+    "22_s1_les_new",
+    "22_s2_les1_new",
+    "22_s2_les2_new",
+    "22_s2_les3_new",
+    "22_s2_les4_new",
+    "22_s2_les5_new",
+    "22_s2_les6_new",
 ]
 
-# method 1
-# df_csv_append = pd.DataFrame() 
-# append the CSV files
-# for file in new_csv_names_list:
-#     df = pd.read_csv(file)
-#     df_csv_append = df_csv_append.append(df, ignore_index=True)
-#  
-# print(np.array(df_csv_append).shape)
+new_list = []
+# getting data from all data other files
+for i in range(len(files_list)):
+    with open(str(files_list[i])+'.csv',encoding="utf8") as csv_file: 
+        data = csv.reader(csv_file)
+        for id in list(data)[:]:
+            new_list.append(id)
 
-# method 2
-df0 = pd.read_csv("22_s1_les_new.csv ")
-df1 = pd.read_csv("22_s2_les1_new.csv")
-df2 = pd.read_csv("22_s2_les2_new.csv")
-df3 = pd.read_csv("22_s2_les3_new.csv")
-df4 = pd.read_csv("22_s2_les4_new.csv")
-df5 = pd.read_csv("22_s2_les5_new.csv")
-df6 = pd.read_csv("22_s2_les6_new.csv")
+np_new = np.array(new_list)
+np_new = np.unique(np_new, axis=0) # remove duplicates
 
+np_new = np_new[np_new[:,0].argsort()] # sort by index 0 (by student id)
 
+# creating csv file
+np_id = np_new[:,0]
 
-# remove duplicates in file
+# getting img
+
+for i in range(0, len(np_id)):
+    img_url = 'https://lms.must.edu.mn/Image?code='+ str(i)
+    response = requests.get(img_url)
+    if response.status_code:
+        fp = open('images_by_id/'+str(np_id[i])+'.png', 'wb')
+        fp.write(response.content)
+        fp.close()
+
+'''
+with open("all_students.csv", 'w',encoding="utf-8", newline='') as file:
+    writer = csv.writer(file)
+    writer.writerows(np_id)
+
+    print("done writing")
+'''
