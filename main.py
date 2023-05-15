@@ -29,8 +29,8 @@ for i in range(0, len(np_id)):
         # login_url = "https://lms.must.edu.mn/"
         login_url = "https://lms.must.edu.mn/Image?code=" + str(np_id[i])
         check = "2"
-        login = "B221880037"
-        password = "M592627"
+        login = ""
+        password = ""
         
         with requests.session() as session:
             req = session.get(login_url).text
