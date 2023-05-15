@@ -1,27 +1,58 @@
-import requests 
+import requests
 from bs4 import BeautifulSoup
 import csv
+import numpy as np
+import pandas as pd
 
-login_url = "https://lms.must.edu.mn/"
-check = "2"
-login = "" 
-password = ""
+new_list = []
+# getting data from all data other files
 
-with requests.session() as session: 
-	req = session.get(login_url).text 
-	html = BeautifulSoup(req,"html.parser") 
-	token = html.find("input", {"name": "__RequestVerificationToken"}). attrs["value"] 
+with open(str("all_students") + '.csv', encoding="utf8") as csv_file:
+    data = csv.reader(csv_file)
+    for id in list(data)[:]:
+        new_list.append(id)
 
-payload = { 
-	"__RequestVerificationToken": token,
-	"type": check,
-	"code": login, 
-	"password": password
-}
+np_new = np.array(new_list)
+np_new = np.unique(np_new, axis=0)  # remove duplicates
 
-res = session.post(login_url, data=payload) 
-print(res.url) # print opened url
+np_new = np_new[np_new[:, 0].argsort()]  # sort by index 0 (by student id)
 
+# creating csv file
+np_id = np_new[:, 0]
+
+
+
+# getting img
+
+for i in range(0, len(np_id)):
+        img_url = 'https://lms.must.edu.mn/Image?code=' + str(np_id[i])
+        # login_url = "https://lms.must.edu.mn/"
+        login_url = "https://lms.must.edu.mn/Image?code=" + str(np_id[i])
+        check = "2"
+        login = "B221880037"
+        password = "M592627"
+        
+        with requests.session() as session:
+            req = session.get(login_url).text
+            html = BeautifulSoup(req, "html.parser")
+            # token = html.find("input", {"name": "__RequestVerificationToken"}).attrs["value"]
+            payload = {
+                # "__RequestVerificationToken": token,
+                "type": check,
+                "code": login,
+                "password": password
+            }
+        
+            res = session.post(login_url, data=payload)
+            print(res.url)
+        response = requests.get(img_url)
+        print(response)
+        if response.status_code:
+            fp = open('images_by_id/' + str(np_id[i]) + '.png', 'wb')
+            fp.write(response.content)
+            fp.close()
+
+      # print opened url
 
 def get_all_student_ids_from_lesson(lesson_url,is_print):
 
@@ -205,3 +236,4 @@ lesson_6 = "https://lms.must.edu.mn/Student/Lesson?lcode=S.PT101&tcode=K.PT20&ty
 # almost_main(lesson_link=lesson_4,write_name="22_s2_les4.csv")
 # almost_main(lesson_link=lesson_5,write_name="22_s2_les5.csv")
 # almost_main(lesson_link=lesson_6,write_name="22_s2_les6.csv")
+
