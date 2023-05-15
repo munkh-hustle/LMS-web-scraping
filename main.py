@@ -20,11 +20,13 @@ np_new = np_new[np_new[:, 0].argsort()]  # sort by index 0 (by student id)
 # creating csv file
 np_id = np_new[:, 0]
 
+list_id = list(np_id)
 
+index_id = list_id.index("B222290500")
 
 # getting img
 
-for i in range(0, len(np_id)):
+for i in range(index_id+2, len(np_id)):
         img_url = 'https://lms.must.edu.mn/Image?code=' + str(np_id[i])
         # login_url = "https://lms.must.edu.mn/"
         login_url = "https://lms.must.edu.mn/Image?code=" + str(np_id[i])
