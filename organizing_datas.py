@@ -130,7 +130,6 @@ for i in range(1,7):
     )
 """
 
-# to do:
 # combine all new files
 files_list = [
     "22_s1_les_new",
